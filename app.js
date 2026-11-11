@@ -201,7 +201,9 @@ document.addEventListener("click", e => {
   const toggleRoutine = e.target.closest("[data-routine-toggle]");
   if (toggleRoutine) { const item=data.routines[currentRoutine].find(r=>r.id===toggleRoutine.dataset.routineToggle); if(item)item.done=!item.done; saveData(); renderRoutines(); }
   const toggleHabit = e.target.closest("[data-habit-toggle]");
-  if (toggleHabit) { const item=data.habits.find(h=>h.id===toggleHabit.dataset.habitToggle); if(item){item.done=!item.done;item.doneDate=item.done?todayISO():null;} saveData(); renderHabits(); renderStats(); }
+  if (toggleHabit) { const item=data.habits.find(h=>h.id===toggleHabit.dataset.habitToggle); if(item){item.doneDates=Array.isArray(item.doneDates)?item.doneDates:[];const index=item.doneDates.indexOf(todayISO());if(index>=0)item.doneDates.splice(index,1);else item.doneDates.push(todayISO());item.done=item.doneDates.includes(todayISO());} saveData(); renderHabits(); renderStats(); }
+  const resetHabit = e.target.closest("[data-habit-reset]");
+  if (resetHabit) { const item=data.habits.find(h=>h.id===resetHabit.dataset.habitReset); if(item && window.confirm("Möchtest du die Streak-Aufzeichnung dieser Gewohnheit wirklich zurücksetzen?")){item.doneDates=[];item.done=false;item.doneDate=null;saveData();renderHabits();showToast("Neuer Start – deine Streak beginnt von vorn.");} }
   const del = e.target.closest("[data-delete]");
   if (del) { const key=del.dataset.delete; data[key]=data[key].filter(x=>x.id!==del.dataset.id); saveData(); renderAll(); showToast("Eintrag gelöscht."); }
   const delRoutine = e.target.closest("[data-delete-routine]");

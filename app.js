@@ -1,6 +1,7 @@
 const STORAGE_KEY = "lifeos-data-v1";
 const emptyData = { tasks: [], events: [], notes: [], routines: { morning: [], evening: [], custom: [] }, training: [], habits: [] };
 let data = loadData();
+window.lifeosData = data;
 let currentRoutine = "morning";
 let toastTimer;
 
@@ -115,7 +116,9 @@ function renderStats() {
 }
 function renderAll() {
   renderTasks(); renderEvents(); renderNotes(); renderRoutines(); renderTraining(); renderHabits(); renderWeek(); renderStats();
+  window.lifeosData = data;
 }
+window.lifeosRefreshAll = renderAll;
 function addItem(formId, inputId, collection, extra = {}) {
   const form = document.getElementById(formId);
   form.addEventListener("submit", event => {

@@ -31,7 +31,7 @@ function showToast(message) {
 }
 function showPage(page) {
   document.querySelectorAll(".page").forEach(el => el.classList.toggle("active", el.id === page));
-  document.querySelectorAll(".nav-item").forEach(el => el.classList.toggle("active", el.dataset.page === page || (page === "stats" || page === "training" || page === "habits" || page === "week") && el.dataset.page === "notes"));
+  document.querySelectorAll(".nav-item").forEach(el => el.classList.toggle("active", el.dataset.page === page || (page !== "home" && page !== "tasks" && page !== "calendar" && page !== "routines") && el.dataset.page === "more"));
   if (page === "week") renderWeek();
   if (page === "stats") renderStats();
   window.scrollTo({ top: 0, behavior: "smooth" });

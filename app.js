@@ -9,7 +9,7 @@ function loadData() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
     const result = saved ? { ...emptyData, ...saved, routines: { ...emptyData.routines, ...(saved.routines || {}) } } : structuredClone(emptyData);
-    result.habits = (result.habits || []).map(h => ({ ...h, done: h.doneDate === todayISO() }));
+    result.habits = (result.habits || []).map(h => ({ ...h, doneDates: Array.isArray(h.doneDates) ? h.doneDates : (h.doneDate ? [h.doneDate] : []), done: (Array.isArray(h.doneDates) ? h.doneDates : (h.doneDate ? [h.doneDate] : [])).includes(todayISO()) }));
     return result;
   } catch {
     return structuredClone(emptyData);
@@ -85,13 +85,41 @@ function renderTraining() {
   if (!data.training.length) empty(list, "Noch keine Trainingspläne gespeichert.");
   else list.innerHTML = [...data.training].reverse().map(t => makeCard(t.title, t.details, '<button class="delete-button" data-delete="training" data-id="' + t.id + '" aria-label="Löschen">×</button>')).join("");
 }
+function habitStreak(h) {
+  const dates = [...new Set(h.doneDates || [])].sort();
+  const hasToday = dates.includes(todayISO());
+  const cursor = new Date((hasToday ? todayISO() : previousISO()) + "T00:00:00Z");
+  let current = 0;
+  while (dates.includes(cursor.toISOString().slice(0,10))) { current++; cursor.setUTCDate(cursor.getUTCDate()-1); }
+  let best = 0, run = 0, previous = null;
+  for (const date of dates) {
+    const d = new Date(date + "T00:00:00Z");
+    const gap = previous ? (d - previous) / 86400000 : 0;
+    run = gap === 1 ? run + 1 : 1;
+    best = Math.max(best, run);
+    previous = d;
+  }
+  return { current, best, total: dates.length, hasToday };
+}
+function previousISO() {
+  const d = new Date(); d.setDate(d.getDate()-1);
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
 function renderHabits() {
   const list = document.getElementById("habitsList");
-  if (!data.habits.length) empty(list, "Füge eine Gewohnheit hinzu, die du verfolgen möchtest.");
-  else list.innerHTML = data.habits.map(h => '<article class="item-card ' + (h.done ? "done" : "") + '">' +
-    '<button class="check-button ' + (h.done ? "checked" : "") + '" data-habit-toggle="' + h.id + '">' + (h.done ? "✓" : "") + '</button>' +
-    '<div class="item-main"><p class="item-title">' + escapeHTML(h.title) + '</p><p class="item-meta">' + (h.done ? "Heute abgehakt" : "Für heute offen") + (window.lifeosGetStreak ? " · 🔥 " + window.lifeosGetStreak(h.id) + " Tage Serie" : "") + '</p></div>' +
-    '<button class="delete-button" data-delete="habits" data-id="' + h.id + '" aria-label="Löschen">×</button></article>').join("");
+  if (!data.habits.length) { empty(list, "Füge eine Gewohnheit hinzu, die du verfolgen möchtest."); return; }
+  list.innerHTML = data.habits.map(h => {
+    h.doneDates = Array.isArray(h.doneDates) ? h.doneDates : [];
+    const streak = habitStreak(h);
+    const milestone = streak.current >= 30 ? '<p class="streak-milestone">🏆 30-Tage-Meilenstein erreicht!</p>' : '';
+    return '<article class="habit-card">' +
+      '<div class="habit-card-top"><div class="item-main"><p class="item-title">' + escapeHTML(h.title) + '</p><p class="item-meta">' + (streak.hasToday ? "Heute geschafft" : "Heute noch offen") + '</p></div>' +
+      '<button class="check-button ' + (streak.hasToday ? "checked" : "") + '" data-habit-toggle="' + h.id + '" aria-label="Heute abhaken">' + (streak.hasToday ? "✓" : "") + '</button></div>' +
+      '<div class="streak-stats"><div><strong>🔥 ' + streak.current + '</strong><small>Aktuelle Serie</small></div><div><strong>🏅 ' + streak.best + '</strong><small>Beste Serie</small></div><div><strong>' + streak.total + '</strong><small>Tage insgesamt</small></div></div>' +
+      '<div class="streak-track"><span style="width:' + Math.min(100,streak.current/30*100) + '%"></span></div>' + milestone +
+      '<div class="habit-card-actions"><span class="item-meta">' + (streak.current ? 'Weiter so – Schritt für Schritt.' : 'Dein nächster Tag kann heute beginnen.') + '</span><button class="text-button" data-habit-reset="' + h.id + '">Streak neu starten</button></div>' +
+      '<button class="delete-button habit-delete" data-delete="habits" data-id="' + h.id + '" aria-label="Gewohnheit löschen">×</button></article>';
+  }).join("");
 }
 function todayISO() {
   const d = new Date();

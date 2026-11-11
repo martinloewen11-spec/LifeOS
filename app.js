@@ -107,17 +107,20 @@ function previousISO() {
 }
 function renderHabits() {
   const list = document.getElementById("habitsList");
-  if (!data.habits.length) { empty(list, "Füge eine Gewohnheit hinzu, die du verfolgen möchtest."); return; }
+  if (!data.habits.length) { empty(list, "Füge etwas hinzu, das du aufbauen oder bewusst reduzieren möchtest."); return; }
   list.innerHTML = data.habits.map(h => {
     h.doneDates = Array.isArray(h.doneDates) ? h.doneDates : [];
     const streak = habitStreak(h);
+    const avoid = h.mode === "avoid";
     const milestone = streak.current >= 30 ? '<p class="streak-milestone">🏆 30-Tage-Meilenstein erreicht!</p>' : '';
+    const todayLabel = streak.hasToday ? (avoid ? "Heute eingehalten" : "Heute erledigt") : (avoid ? "Heute noch nicht abgehakt" : "Heute noch offen");
+    const actionLabel = avoid ? "Heute geschafft" : "Heute erledigt";
     return '<article class="habit-card">' +
-      '<div class="habit-card-top"><div class="item-main"><p class="item-title">' + escapeHTML(h.title) + '</p><p class="item-meta">' + (streak.hasToday ? "Heute geschafft" : "Heute noch offen") + '</p></div>' +
-      '<button class="check-button ' + (streak.hasToday ? "checked" : "") + '" data-habit-toggle="' + h.id + '" aria-label="Heute abhaken">' + (streak.hasToday ? "✓" : "") + '</button></div>' +
-      '<div class="streak-stats"><div><strong>🔥 ' + streak.current + '</strong><small>Aktuelle Serie</small></div><div><strong>🏅 ' + streak.best + '</strong><small>Beste Serie</small></div><div><strong>' + streak.total + '</strong><small>Tage insgesamt</small></div></div>' +
+      '<div class="habit-card-top"><div class="item-main"><p class="item-title">' + escapeHTML(h.title) + '</p><p class="item-meta">' + todayLabel + '</p></div>' +
+      '<button class="check-button ' + (streak.hasToday ? "checked" : "") + '" data-habit-toggle="' + h.id + '" aria-label="' + actionLabel + '">' + (streak.hasToday ? "✓" : "") + '</button></div>' +
+      '<div class="streak-stats"><div><strong>🔥 ' + streak.current + '</strong><small>' + (avoid ? "Tage am Stück" : "Tage in Folge") + '</small></div><div><strong>🏅 ' + streak.best + '</strong><small>Beste Serie</small></div><div><strong>' + streak.total + '</strong><small>Check-ins</small></div></div>' +
       '<div class="streak-track"><span style="width:' + Math.min(100,streak.current/30*100) + '%"></span></div>' + milestone +
-      '<div class="habit-card-actions"><span class="item-meta">' + (streak.current ? 'Weiter so – Schritt für Schritt.' : 'Dein nächster Tag kann heute beginnen.') + '</span><button class="text-button" data-habit-reset="' + h.id + '">Streak neu starten</button></div>' +
+      '<div class="habit-card-actions"><span class="item-meta">' + (streak.current ? (avoid ? "Ein Tag nach dem anderen." : "Weiter so – Schritt für Schritt.") : "Du kannst jederzeit neu anfangen.") + '</span><button class="text-button" data-habit-reset="' + h.id + '">Streak neu starten</button></div>' +
       '<button class="delete-button habit-delete" data-delete="habits" data-id="' + h.id + '" aria-label="Gewohnheit löschen">×</button></article>';
   }).join("");
 }
@@ -192,7 +195,14 @@ document.getElementById("trainingForm").addEventListener("submit", e => {
   data.training.push({id:crypto.randomUUID(),title,details});
   saveData(); e.target.reset(); renderTraining(); renderStats(); showToast("Trainingsplan gespeichert.");
 });
-addItem("habitForm","habitInput","habits", () => ({done:false}));
+document.getElementById("habitForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const title = document.getElementById("habitInput").value.trim();
+  if (!title) return;
+  const mode = document.getElementById("habitType").value;
+  data.habits.push({id:crypto.randomUUID(),title,mode,done:false,doneDates:[]});
+  saveData(); e.target.reset(); renderHabits(); renderStats(); showToast("Gewohnheit gespeichert.");
+});
 document.addEventListener("click", e => {
   const pageButton = e.target.closest("[data-page]");
   if (pageButton) showPage(pageButton.dataset.page);

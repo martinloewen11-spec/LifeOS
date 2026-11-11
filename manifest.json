@@ -1,0 +1,11 @@
+{
+  "name": "LifeOS",
+  "short_name": "LifeOS",
+  "description": "Dein persönlicher Organizer",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f5f7",
+  "theme_color": "#f5f5f7",
+  "lang": "de"
+}

@@ -88,7 +88,7 @@ function renderHabits() {
   if (!data.habits.length) empty(list, "Füge eine Gewohnheit hinzu, die du verfolgen möchtest.");
   else list.innerHTML = data.habits.map(h => '<article class="item-card ' + (h.done ? "done" : "") + '">' +
     '<button class="check-button ' + (h.done ? "checked" : "") + '" data-habit-toggle="' + h.id + '">' + (h.done ? "✓" : "") + '</button>' +
-    '<div class="item-main"><p class="item-title">' + escapeHTML(h.title) + '</p><p class="item-meta">' + (h.done ? "Heute abgehakt" : "Für heute offen") + '</p></div>' +
+    '<div class="item-main"><p class="item-title">' + escapeHTML(h.title) + '</p><p class="item-meta">' + (h.done ? "Heute abgehakt" : "Für heute offen") + (window.lifeosGetStreak ? " · 🔥 " + window.lifeosGetStreak(h.id) + " Tage Serie" : "") + '</p></div>' +
     '<button class="delete-button" data-delete="habits" data-id="' + h.id + '" aria-label="Löschen">×</button></article>').join("");
 }
 function todayISO() {
@@ -119,6 +119,7 @@ function renderAll() {
   window.lifeosData = data;
 }
 window.lifeosRefreshAll = renderAll;
+window.lifeosSaveData = saveData;
 function addItem(formId, inputId, collection, extra = {}) {
   const form = document.getElementById(formId);
   form.addEventListener("submit", event => {

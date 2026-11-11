@@ -8,7 +8,9 @@ let toastTimer;
 function loadData() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    return saved ? { ...emptyData, ...saved, routines: { ...emptyData.routines, ...(saved.routines || {}) } } : structuredClone(emptyData);
+    const result = saved ? { ...emptyData, ...saved, routines: { ...emptyData.routines, ...(saved.routines || {}) } } : structuredClone(emptyData);
+    result.habits = (result.habits || []).map(h => ({ ...h, done: h.doneDate === todayISO() }));
+    return result;
   } catch {
     return structuredClone(emptyData);
   }
@@ -171,7 +173,7 @@ document.addEventListener("click", e => {
   const toggleRoutine = e.target.closest("[data-routine-toggle]");
   if (toggleRoutine) { const item=data.routines[currentRoutine].find(r=>r.id===toggleRoutine.dataset.routineToggle); if(item)item.done=!item.done; saveData(); renderRoutines(); }
   const toggleHabit = e.target.closest("[data-habit-toggle]");
-  if (toggleHabit) { const item=data.habits.find(h=>h.id===toggleHabit.dataset.habitToggle); if(item)item.done=!item.done; saveData(); renderHabits(); renderStats(); }
+  if (toggleHabit) { const item=data.habits.find(h=>h.id===toggleHabit.dataset.habitToggle); if(item){item.done=!item.done;item.doneDate=item.done?todayISO():null;} saveData(); renderHabits(); renderStats(); }
   const del = e.target.closest("[data-delete]");
   if (del) { const key=del.dataset.delete; data[key]=data[key].filter(x=>x.id!==del.dataset.id); saveData(); renderAll(); showToast("Eintrag gelöscht."); }
   const delRoutine = e.target.closest("[data-delete-routine]");

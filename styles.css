@@ -89,3 +89,9 @@ body.theme-dark{background:#17181c}body.theme-lavender{background:#f4f0fa}
 .feature-tile small{font-size:10px;line-height:1.35;color:var(--muted)}
 .feature-tile:active,.shortcut:active{transform:scale(.98)}
 @media(min-width:600px){.feature-group-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Vollständiger Home-Schnellzugriff und Gewohnheitstypen */
+#home .feature-groups{margin-top:4px}
+#home .feature-group{box-shadow:0 2px 12px #17181c05}
+#home .feature-tile{min-height:88px}
+#habits .form-card select{width:100%;padding:13px 14px;border:1px solid #e7e7ec;border-radius:12px;background:var(--soft);color:var(--ink)}

@@ -11,6 +11,7 @@
  const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
  const quotes=["Beginne dort, wo du bist. Nutze, was du hast. Tu, was du kannst.","Kleine Schritte bringen dich ebenfalls voran.","Klarheit entsteht oft, wenn du einfach anfängst.","Konzentriere dich auf den nächsten sinnvollen Schritt.","Fortschritt muss nicht perfekt aussehen.","Gute Gewohnheiten wachsen durch Wiederholung.","Du musst nicht alles heute schaffen.","Ein guter Plan lässt Raum für Pausen."];
  window.lifeosGetStreak=id=>{const dates=(extra.habitHistory[id]||[]).slice().sort().reverse();let cursor=new Date(today()+"T00:00:00");if(!dates.includes(today()))cursor.setDate(cursor.getDate()-1);let count=0;while(dates.includes(cursor.getFullYear()+"-"+String(cursor.getMonth()+1).padStart(2,"0")+"-"+String(cursor.getDate()).padStart(2,"0"))){count++;cursor.setDate(cursor.getDate()-1)}return count};
+ if(extra.quoteDate!==today()){const dayNumber=Math.floor((new Date(today()+"T00:00:00")-new Date(new Date().getFullYear(),0,0))/86400000);extra.quoteIndex=dayNumber%quotes.length;extra.quoteDate=today();save()}
  const setTheme=t=>{document.body.classList.remove("theme-dark","theme-lavender");if(t==="dark")document.body.classList.add("theme-dark");if(t==="lavender")document.body.classList.add("theme-lavender");extra.theme=t;save()};
  setTheme(extra.theme);
  function renderQuote(){ $("dailyQuoteText").textContent=quotes[extra.quoteIndex%quotes.length] }

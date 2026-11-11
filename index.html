@@ -28,20 +28,14 @@
           <p>Ein Schritt nach dem anderen.</p>
         </div>
         <div class="section-heading"><h3>Dein LifeOS</h3><span>Alles an einem Ort</span></div>
+        <div class="section-heading"><h3>Schnellzugriff</h3><span>Deine wichtigsten Bereiche</span></div>
         <div class="shortcut-grid">
           <button class="shortcut" data-page="tasks"><span>✓</span>Aufgaben</button>
           <button class="shortcut" data-page="calendar"><span>▦</span>Kalender</button>
-          <button class="shortcut" data-page="notes"><span>✎</span>Notizen</button>
           <button class="shortcut" data-page="routines"><span>↗</span>Routinen</button>
           <button class="shortcut" data-page="training"><span>◇</span>Training</button>
-          <button class="shortcut" data-page="habits"><span>✳</span>Gewohnheiten</button>
-          <button class="shortcut" data-page="week"><span>▤</span>Wochenplan</button>
-          <button class="shortcut" data-page="stats"><span>◷</span>Statistik</button>
-          <button class="shortcut" data-page="dayplan"><span>☀</span>Tagesplan</button>
-          <button class="shortcut" data-page="workoutgen"><span>◇</span>Workout</button>
-          <button class="shortcut" data-page="focus"><span>◉</span>Focus</button>
-          <button class="shortcut" data-page="more"><span>＋</span>Mehr</button>
         </div>
+        <div class="section-heading"><h3>Weitere Bereiche</h3><button class="text-button" data-page="more">Alle Funktionen ansehen</button></div>
         <div class="section-heading"><h3>Offene Aufgaben</h3><button class="text-button" data-page="tasks">Alle ansehen</button></div>
         <div id="homeTasks" class="stack"></div>
         <div class="section-heading"><h3>Als Nächstes</h3><button class="text-button" data-page="calendar">Kalender</button></div>
@@ -128,17 +122,45 @@
       </section>
 
       <section id="more" class="page">
-        <div class="page-heading"><p class="eyebrow">LIFEOS ERWEITERN</p><h2>Mehr entdecken</h2><p>Deine zusätzlichen Werkzeuge an einem Ort.</p></div>
-        <div class="feature-menu">
-          <button data-page="dayplan">☀️ <span><b>Intelligenter Tagesplan</b><small>Aufgaben, Termine und Routinen bündeln</small></span>›</button>
-          <button data-page="workoutgen">🏋️ <span><b>Workout-Generator</b><small>Einen Trainingsplan als Startpunkt erstellen</small></span>›</button>
-          <button data-page="focus">◉ <span><b>Focus Mode</b><small>Eine Aufgabe in Ruhe bearbeiten</small></span>›</button>
-          <button data-page="journal">📖 <span><b>Tagebuch</b><small>Deine Gedanken festhalten</small></span>›</button>
-          <button data-page="projects">▣ <span><b>Projektmanager</b><small>Projekte und nächste Schritte verwalten</small></span>›</button>
-          <button data-page="countdowns">⏳ <span><b>Countdowns</b><small>Wichtige Daten im Blick behalten</small></span>›</button>
-          <button data-page="appearance">◐ <span><b>Design-Anpassung</b><small>Farben und Darstellung ändern</small></span>›</button>
-          <button data-page="quote">✦ <span><b>Daily Quote</b><small>Ein Gedanke für den Tag</small></span>›</button>
-          <button data-page="briefing">☀ <span><b>Morgen-Briefing</b><small>Dein heutiger Überblick</small></span>›</button>
+        <div class="page-heading"><p class="eyebrow">ÜBERSICHT</p><h2>Deine Bereiche</h2><p>Alle Funktionen sind jetzt thematisch sortiert, damit du schneller findest, was du suchst.</p></div>
+        <div class="feature-groups">
+          <section class="feature-group">
+            <div class="feature-group-heading"><span>01</span><div><h3>Planung &amp; Termine</h3><p>Behalte Aufgaben, Termine und wichtige Daten im Blick.</p></div></div>
+            <div class="feature-group-grid">
+              <button class="feature-tile" data-page="dayplan"><span>☀️</span><b>Tagesplan</b><small>Dein Tag auf einen Blick</small></button>
+              <button class="feature-tile" data-page="tasks"><span>✓</span><b>Aufgaben</b><small>Was noch zu erledigen ist</small></button>
+              <button class="feature-tile" data-page="calendar"><span>▦</span><b>Kalender</b><small>Deine Termine</small></button>
+              <button class="feature-tile" data-page="week"><span>▤</span><b>Wochenplan</b><small>Die ganze Woche</small></button>
+              <button class="feature-tile" data-page="countdowns"><span>⏳</span><b>Countdowns</b><small>Wichtige Ereignisse</small></button>
+            </div>
+          </section>
+          <section class="feature-group">
+            <div class="feature-group-heading"><span>02</span><div><h3>Alltag &amp; Routinen</h3><p>Gestalte deine täglichen Abläufe und halte Gedanken fest.</p></div></div>
+            <div class="feature-group-grid">
+              <button class="feature-tile" data-page="routines"><span>↗</span><b>Routinen</b><small>Morgen, Abend &amp; eigene</small></button>
+              <button class="feature-tile" data-page="habits"><span>✳</span><b>Gewohnheiten</b><small>Deine täglichen Check-ins</small></button>
+              <button class="feature-tile" data-page="journal"><span>📖</span><b>Tagebuch</b><small>Gedanken festhalten</small></button>
+              <button class="feature-tile" data-page="notes"><span>✎</span><b>Notizen</b><small>Ideen sammeln</small></button>
+            </div>
+          </section>
+          <section class="feature-group">
+            <div class="feature-group-heading"><span>03</span><div><h3>Training &amp; Fortschritt</h3><p>Organisiere deine Trainingspläne und behalte den Überblick.</p></div></div>
+            <div class="feature-group-grid">
+              <button class="feature-tile" data-page="training"><span>◇</span><b>Trainingspläne</b><small>Eigene Pläne speichern</small></button>
+              <button class="feature-tile" data-page="workoutgen"><span>🏋️</span><b>Workout-Generator</b><small>Neue Einheiten vorschlagen</small></button>
+              <button class="feature-tile" data-page="stats"><span>◷</span><b>Statistik</b><small>Deine Einträge im Blick</small></button>
+            </div>
+          </section>
+          <section class="feature-group">
+            <div class="feature-group-heading"><span>04</span><div><h3>Fokus &amp; Inspiration</h3><p>Werkzeuge für konzentriertes Arbeiten und neue Ideen.</p></div></div>
+            <div class="feature-group-grid">
+              <button class="feature-tile" data-page="focus"><span>◉</span><b>Focus Mode</b><small>Zeit zum Konzentrieren</small></button>
+              <button class="feature-tile" data-page="briefing"><span>☀</span><b>Morgen-Briefing</b><small>Dein Tagesüberblick</small></button>
+              <button class="feature-tile" data-page="quote"><span>✦</span><b>Daily Quote</b><small>Ein Gedanke für heute</small></button>
+              <button class="feature-tile" data-page="projects"><span>▣</span><b>Projekte</b><small>Große Ziele in Schritte teilen</small></button>
+              <button class="feature-tile" data-page="appearance"><span>◐</span><b>Design</b><small>Darstellung anpassen</small></button>
+            </div>
+          </section>
         </div>
       </section>
 

@@ -37,6 +37,10 @@
           <button class="shortcut" data-page="habits"><span>✳</span>Gewohnheiten</button>
           <button class="shortcut" data-page="week"><span>▤</span>Wochenplan</button>
           <button class="shortcut" data-page="stats"><span>◷</span>Statistik</button>
+          <button class="shortcut" data-page="dayplan"><span>☀</span>Tagesplan</button>
+          <button class="shortcut" data-page="workoutgen"><span>◇</span>Workout</button>
+          <button class="shortcut" data-page="focus"><span>◉</span>Focus</button>
+          <button class="shortcut" data-page="more"><span>＋</span>Mehr</button>
         </div>
         <div class="section-heading"><h3>Offene Aufgaben</h3><button class="text-button" data-page="tasks">Alle ansehen</button></div>
         <div id="homeTasks" class="stack"></div>
@@ -122,6 +126,31 @@
         <div class="page-heading"><p class="eyebrow">DEIN FORTSCHRITT</p><h2>Statistik</h2><p>Ein Überblick über deine Einträge in LifeOS.</p></div>
         <div id="statsGrid" class="stats-grid"></div>
       </section>
+
+      <section id="more" class="page">
+        <div class="page-heading"><p class="eyebrow">LIFEOS ERWEITERN</p><h2>Mehr entdecken</h2><p>Deine zusätzlichen Werkzeuge an einem Ort.</p></div>
+        <div class="feature-menu">
+          <button data-page="dayplan">☀️ <span><b>Intelligenter Tagesplan</b><small>Aufgaben, Termine und Routinen bündeln</small></span>›</button>
+          <button data-page="workoutgen">🏋️ <span><b>Workout-Generator</b><small>Einen Trainingsplan als Startpunkt erstellen</small></span>›</button>
+          <button data-page="focus">◉ <span><b>Focus Mode</b><small>Eine Aufgabe in Ruhe bearbeiten</small></span>›</button>
+          <button data-page="journal">📖 <span><b>Tagebuch</b><small>Deine Gedanken festhalten</small></span>›</button>
+          <button data-page="projects">▣ <span><b>Projektmanager</b><small>Projekte und nächste Schritte verwalten</small></span>›</button>
+          <button data-page="countdowns">⏳ <span><b>Countdowns</b><small>Wichtige Daten im Blick behalten</small></span>›</button>
+          <button data-page="appearance">◐ <span><b>Design-Anpassung</b><small>Farben und Darstellung ändern</small></span>›</button>
+          <button data-page="quote">✦ <span><b>Daily Quote</b><small>Ein Gedanke für den Tag</small></span>›</button>
+          <button data-page="briefing">☀ <span><b>Morgen-Briefing</b><small>Dein heutiger Überblick</small></span>›</button>
+        </div>
+      </section>
+
+      <section id="dayplan" class="page"><div class="page-heading"><p class="eyebrow">DEIN TAG</p><h2>Intelligenter Tagesplan</h2><p>Eine automatische Übersicht aus deinen vorhandenen Einträgen.</p></div><div class="feature-actions"><button class="primary-button" id="refreshDayPlan">Plan aktualisieren</button></div><div id="dayPlanContent" class="stack"></div></section>
+      <section id="workoutgen" class="page"><div class="page-heading"><p class="eyebrow">TRAININGSPLANUNG</p><h2>Workout-Generator</h2><p>Erstelle einen ausgewogenen Trainingsplan als Vorschlag und passe ihn an deine Möglichkeiten an.</p></div><div class="form-card"><label for="workoutType">Trainingsart</label><select id="workoutType"><option value="full">Ganzkörper</option><option value="upper">Oberkörper</option><option value="lower">Unterkörper</option><option value="mobility">Beweglichkeit &amp; Core</option></select><label for="workoutLevel">Erfahrung</label><select id="workoutLevel"><option value="beginner">Einsteiger</option><option value="regular">Regelmäßig aktiv</option></select><button class="primary-button full-button" id="generateWorkout">Plan erstellen</button></div><div id="workoutResult" class="stack"></div></section>
+      <section id="focus" class="page"><div class="page-heading"><p class="eyebrow">KONZENTRATION</p><h2>Focus Mode</h2><p>Wähle eine Aufgabe und nimm dir eine ungestörte Arbeitsphase.</p></div><div class="form-card"><label for="focusTask">Woran möchtest du arbeiten?</label><input id="focusTask" maxlength="120" placeholder="z. B. Hausaufgaben"><label for="focusMinutes">Dauer in Minuten</label><select id="focusMinutes"><option value="15">15 Minuten</option><option value="25" selected>25 Minuten</option><option value="45">45 Minuten</option></select><div class="focus-clock" id="focusClock">25:00</div><div class="input-row"><button class="primary-button" id="focusStart">Start</button><button class="secondary-button" id="focusReset">Zurücksetzen</button></div><p id="focusStatus" class="item-meta">Bereit, wenn du es bist.</p></div></section>
+      <section id="journal" class="page"><div class="page-heading"><p class="eyebrow">DEINE GEDANKEN</p><h2>Tagebuch</h2><p>Ein privater Ort für deine täglichen Notizen auf diesem Gerät.</p></div><form id="journalForm" class="form-card"><label for="journalMood">Wie war dein Tag?</label><select id="journalMood"><option>Gut</option><option>Ganz okay</option><option>Anstrengend</option><option>Aufregend</option><option>Ruhig</option></select><label for="journalText">Dein Eintrag</label><textarea id="journalText" rows="5" maxlength="5000" placeholder="Was ist heute passiert? Was möchtest du festhalten?" required></textarea><button class="primary-button full-button">Eintrag speichern</button></form><div id="journalList" class="stack"></div></section>
+      <section id="projects" class="page"><div class="page-heading"><p class="eyebrow">IDEEN UMSETZEN</p><h2>Projektmanager</h2><p>Teile größere Vorhaben in überschaubare Schritte.</p></div><form id="projectForm" class="form-card"><label for="projectName">Neues Projekt</label><input id="projectName" maxlength="100" placeholder="Projektname" required><label for="projectDescription">Beschreibung (optional)</label><textarea id="projectDescription" rows="2" maxlength="500" placeholder="Worum geht es?"></textarea><button class="primary-button full-button">Projekt erstellen</button></form><div id="projectList" class="stack"></div></section>
+      <section id="countdowns" class="page"><div class="page-heading"><p class="eyebrow">WICHTIGE DATEN</p><h2>Countdowns</h2><p>Behalte besondere Termine im Blick.</p></div><form id="countdownForm" class="form-card"><label for="countdownName">Ereignis</label><input id="countdownName" maxlength="100" placeholder="z. B. Ferienbeginn" required><label for="countdownDate">Datum</label><input id="countdownDate" type="date" required><button class="primary-button full-button">Countdown hinzufügen</button></form><div id="countdownList" class="stack"></div></section>
+      <section id="appearance" class="page"><div class="page-heading"><p class="eyebrow">DEIN LOOK</p><h2>Design-Anpassung</h2><p>Wähle das Erscheinungsbild von LifeOS.</p></div><div class="theme-options"><button data-theme-choice="light">☀️<b>Hell</b><small>Clean &amp; minimal</small></button><button data-theme-choice="dark">🌙<b>Dunkel</b><small>Ruhig &amp; kontrastreich</small></button><button data-theme-choice="lavender">✦<b>Lavendel</b><small>Dezent &amp; weich</small></button></div><p class="item-meta">Die Auswahl wird auf diesem Gerät gespeichert.</p></section>
+      <section id="quote" class="page"><div class="page-heading"><p class="eyebrow">KLEINER IMPULS</p><h2>Daily Quote</h2><p>Ein neuer Gedanke für heute.</p></div><div class="quote-card"><p class="eyebrow">DEIN ZITAT</p><blockquote id="dailyQuoteText"></blockquote><button class="secondary-button" id="newQuote">Anderes Zitat</button></div></section>
+      <section id="briefing" class="page"><div class="page-heading"><p class="eyebrow">GUTEN MORGEN</p><h2>Dein Morgen-Briefing</h2><p>Das Wichtigste für deinen heutigen Tag.</p></div><div id="briefingContent" class="stack"></div></section>
     </main>
 
     <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -129,10 +158,11 @@
       <button class="nav-item" data-page="tasks"><span>✓</span><small>Aufgaben</small></button>
       <button class="nav-item" data-page="calendar"><span>▦</span><small>Kalender</small></button>
       <button class="nav-item" data-page="routines"><span>↗</span><small>Routinen</small></button>
-      <button class="nav-item" data-page="notes"><span>•••</span><small>Mehr</small></button>
+      <button class="nav-item" data-page="more"><span>•••</span><small>Mehr</small></button>
     </nav>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="app.js"></script>
+  <script src="features.js"></script>
 </body>
 </html>

@@ -6,6 +6,10 @@
   <meta name="theme-color" content="#f5f5f7">
   <meta name="description" content="LifeOS – dein persönlicher Organizer">
   <title>LifeOS</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="LifeOS">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -225,5 +229,12 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="app.js"></script>
   <script src="features.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+      });
+    }
+  </script>
 </body>
 </html>

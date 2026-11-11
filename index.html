@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f5f7">
+  <meta name="description" content="LifeOS – dein persönlicher Organizer">
+  <title>LifeOS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">DEIN PERSÖNLICHER ORGANIZER</p>
+        <h1>LifeOS<span>.</span></h1>
+      </div>
+      <button class="icon-button" id="quickAdd" aria-label="Schnell hinzufügen">＋</button>
+    </header>
+
+    <main>
+      <section id="home" class="page active">
+        <p class="date-line" id="dateLine"></p>
+        <h2 class="page-title">Dein Tag im Blick.</h2>
+        <div class="hero-card">
+          <p class="eyebrow">DEIN NEUER START</p>
+          <h2>Mach den Tag zu deinem.</h2>
+          <p>Ein Schritt nach dem anderen.</p>
+        </div>
+        <div class="section-heading"><h3>Dein LifeOS</h3><span>Alles an einem Ort</span></div>
+        <div class="shortcut-grid">
+          <button class="shortcut" data-page="tasks"><span>✓</span>Aufgaben</button>
+          <button class="shortcut" data-page="calendar"><span>▦</span>Kalender</button>
+          <button class="shortcut" data-page="notes"><span>✎</span>Notizen</button>
+          <button class="shortcut" data-page="routines"><span>↗</span>Routinen</button>
+          <button class="shortcut" data-page="training"><span>◇</span>Training</button>
+          <button class="shortcut" data-page="habits"><span>✳</span>Gewohnheiten</button>
+          <button class="shortcut" data-page="week"><span>▤</span>Wochenplan</button>
+          <button class="shortcut" data-page="stats"><span>◷</span>Statistik</button>
+        </div>
+        <div class="section-heading"><h3>Offene Aufgaben</h3><button class="text-button" data-page="tasks">Alle ansehen</button></div>
+        <div id="homeTasks" class="stack"></div>
+        <div class="section-heading"><h3>Als Nächstes</h3><button class="text-button" data-page="calendar">Kalender</button></div>
+        <div id="homeEvents" class="stack"></div>
+      </section>
+
+      <section id="tasks" class="page">
+        <div class="page-heading"><p class="eyebrow">ORGANISIERT BLEIBEN</p><h2>Aufgaben</h2><p>Was möchtest du erledigen?</p></div>
+        <form id="taskForm" class="form-card">
+          <label for="taskInput">Neue Aufgabe</label>
+          <div class="input-row"><input id="taskInput" maxlength="120" placeholder="z. B. Schulsachen packen" required><button class="primary-button">＋</button></div>
+        </form>
+        <div id="tasksList" class="stack"></div>
+      </section>
+
+      <section id="calendar" class="page">
+        <div class="page-heading"><p class="eyebrow">TERMINE IM BLICK</p><h2>Kalender</h2><p>Deine nächsten Termine.</p></div>
+        <form id="eventForm" class="form-card">
+          <label for="eventTitle">Neuer Termin</label>
+          <input id="eventTitle" maxlength="120" placeholder="Terminname" required>
+          <div class="input-row">
+            <input id="eventDate" type="date" required aria-label="Datum">
+            <input id="eventTime" type="time" aria-label="Uhrzeit">
+          </div>
+          <button class="primary-button full-button">Termin speichern</button>
+        </form>
+        <div id="eventsList" class="stack"></div>
+      </section>
+
+      <section id="notes" class="page">
+        <div class="page-heading"><p class="eyebrow">GEDANKEN FESTHALTEN</p><h2>Notizen</h2><p>Ideen und Gedanken an einem Ort.</p></div>
+        <form id="noteForm" class="form-card">
+          <label for="noteTitle">Neue Notiz</label>
+          <input id="noteTitle" maxlength="100" placeholder="Titel" required>
+          <textarea id="noteText" rows="4" maxlength="3000" placeholder="Schreib etwas auf ..."></textarea>
+          <button class="primary-button full-button">Notiz speichern</button>
+        </form>
+        <div id="notesList" class="stack"></div>
+      </section>
+
+      <section id="routines" class="page">
+        <div class="page-heading"><p class="eyebrow">GUTE ABLÄUFE</p><h2>Routinen</h2><p>Baue dir Abläufe, die zu deinem Alltag passen.</p></div>
+        <div class="segmented">
+          <button class="selected" data-routine="morning">Morgen</button>
+          <button data-routine="evening">Abend</button>
+          <button data-routine="custom">Eigene</button>
+        </div>
+        <form id="routineForm" class="form-card">
+          <label for="routineInput">Neuer Routinen-Schritt</label>
+          <div class="input-row"><input id="routineInput" maxlength="120" placeholder="z. B. Tasche vorbereiten" required><button class="primary-button">＋</button></div>
+        </form>
+        <div id="routinesList" class="stack"></div>
+      </section>
+
+      <section id="training" class="page">
+        <div class="page-heading"><p class="eyebrow">PLANUNG</p><h2>Trainingspläne</h2><p>Erstelle und speichere deine Trainingspläne.</p></div>
+        <form id="trainingForm" class="form-card">
+          <label for="trainingName">Name des Plans</label>
+          <input id="trainingName" maxlength="100" placeholder="z. B. Ganzkörper A" required>
+          <label for="trainingExercises">Übungen und Ablauf</label>
+          <textarea id="trainingExercises" rows="5" maxlength="3000" placeholder="Übung 1 – Sätze und Wiederholungen ... " required></textarea>
+          <button class="primary-button full-button">Trainingsplan speichern</button>
+        </form>
+        <div id="trainingList" class="stack"></div>
+      </section>
+
+      <section id="habits" class="page">
+        <div class="page-heading"><p class="eyebrow">KLEINE SCHRITTE</p><h2>Gewohnheiten</h2><p>Halte fest, woran du regelmäßig arbeiten möchtest.</p></div>
+        <form id="habitForm" class="form-card">
+          <label for="habitInput">Neue Gewohnheit</label>
+          <div class="input-row"><input id="habitInput" maxlength="100" placeholder="z. B. Lesen" required><button class="primary-button">＋</button></div>
+        </form>
+        <div id="habitsList" class="stack"></div>
+      </section>
+
+      <section id="week" class="page">
+        <div class="page-heading"><p class="eyebrow">ÜBERSICHT</p><h2>Wochenplan</h2><p>Eine einfache Übersicht für deine Woche.</p></div>
+        <div id="weekList" class="stack"></div>
+      </section>
+
+      <section id="stats" class="page">
+        <div class="page-heading"><p class="eyebrow">DEIN FORTSCHRITT</p><h2>Statistik</h2><p>Ein Überblick über deine Einträge in LifeOS.</p></div>
+        <div id="statsGrid" class="stats-grid"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Hauptnavigation">
+      <button class="nav-item active" data-page="home"><span>⌂</span><small>Home</small></button>
+      <button class="nav-item" data-page="tasks"><span>✓</span><small>Aufgaben</small></button>
+      <button class="nav-item" data-page="calendar"><span>▦</span><small>Kalender</small></button>
+      <button class="nav-item" data-page="routines"><span>↗</span><small>Routinen</small></button>
+      <button class="nav-item" data-page="notes"><span>•••</span><small>Mehr</small></button>
+    </nav>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

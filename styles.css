@@ -108,3 +108,37 @@ body.theme-dark{background:#17181c}body.theme-lavender{background:#f4f0fa}
 .smart-day{padding:15px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
 .smart-day h3{margin:0 0 8px;font-size:14px}.smart-entry{padding:8px 0;border-top:1px solid var(--line);font-size:12px}
 .reminder-overdue{border-color:#b7a0a0}
+
+/* LifeOS Home – ein gemeinsamer Schnellzugriff mit fünf Akkordeon-Bereichen */
+.brand-home{display:block;padding:0;border:0;background:transparent;color:inherit;text-align:left}
+.brand-home .eyebrow{margin-bottom:7px}
+.brand-home h1{font:inherit;font-size:30px;letter-spacing:-1.4px;font-weight:800}
+.brand-home:active{opacity:.72}
+#home .feature-groups{display:flex;flex-direction:column;gap:0;margin-top:4px;padding:5px 17px;border:1px solid var(--line);border-radius:22px;background:var(--surface);box-shadow:0 2px 12px #17181c05;overflow:hidden}
+#home .feature-group{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+#home .feature-group+.feature-group{border-top:1px solid var(--line)}
+#home .feature-group-heading{width:100%;display:flex;align-items:center;gap:12px;margin:0;padding:17px 0;border:0;background:transparent;color:var(--ink);text-align:left}
+#home .feature-group-heading>span{display:grid;place-items:center;width:34px;height:34px;flex:0 0 34px;border-radius:11px;background:var(--soft);color:var(--muted);font-size:11px;font-weight:800}
+#home .feature-group-heading>div{min-width:0;flex:1}
+#home .feature-group-heading h3{margin:0 0 3px;font-size:14px;letter-spacing:-.2px}
+#home .feature-group-heading p{margin:0;color:var(--muted);font-size:11px;line-height:1.4}
+#home .feature-group-heading::after{content:"⌄";margin-left:auto;color:var(--muted);font-size:22px;line-height:1;transition:transform .2s ease}
+#home .feature-group.is-open .feature-group-heading::after{transform:rotate(180deg)}
+#home .feature-group-grid{display:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 0 16px 46px}
+#home .feature-group.is-open .feature-group-grid{display:grid;animation:featureReveal .18s ease}
+#home .feature-tile{min-height:78px;padding:11px;border-radius:13px}
+#home .feature-tile>span{font-size:17px}
+#home .feature-tile b{font-size:11px}
+#home .feature-tile small{font-size:9px}
+@keyframes featureReveal{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.splash-screen{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#17181c;color:#fff;opacity:1;transition:opacity .2s ease}
+.splash-screen.splash-hidden{opacity:0;pointer-events:none}
+.splash-mark{font-size:54px;font-weight:850;letter-spacing:-5px;line-height:1;animation:splashPop .48s cubic-bezier(.2,.8,.2,1) both}
+.splash-mark span{color:#9da1b0}
+.splash-word{margin-top:10px;font-size:15px;font-weight:650;letter-spacing:4px;opacity:0;animation:splashText .35s ease .12s forwards}
+.splash-line{width:34px;height:2px;margin-top:18px;border-radius:4px;background:#aeb1bc;transform:scaleX(0);transform-origin:center;animation:splashLine .35s ease .2s forwards}
+@keyframes splashPop{from{opacity:0;transform:scale(.88);filter:blur(5px)}to{opacity:1;transform:scale(1);filter:blur(0)}}
+@keyframes splashText{to{opacity:.78}}
+@keyframes splashLine{to{transform:scaleX(1)}}
+@media(max-width:380px){#home .feature-group-grid{padding-left:0}}
+@media(prefers-reduced-motion:reduce){.splash-mark,.splash-word,.splash-line,#home .feature-group.is-open .feature-group-grid{animation:none}.splash-word{opacity:.78}.splash-line{transform:scaleX(1)}}

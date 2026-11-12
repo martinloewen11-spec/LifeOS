@@ -95,3 +95,16 @@ body.theme-dark{background:#17181c}body.theme-lavender{background:#f4f0fa}
 #home .feature-group{box-shadow:0 2px 12px #17181c05}
 #home .feature-tile{min-height:88px}
 #habits .form-card select{width:100%;padding:13px 14px;border:1px solid #e7e7ec;border-radius:12px;background:var(--soft);color:var(--ink)}
+
+/* LifeOS 3 – zusätzliche Bereiche */
+.assistant-prompts{display:flex;gap:8px;overflow-x:auto;margin:0 0 12px}.assistant-prompts button{white-space:nowrap}
+.activity-month{display:flex;align-items:center;justify-content:space-between;margin:12px 0}
+.activity-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.activity-cell{min-height:48px;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12px}
+.activity-cell small{font-size:9px;color:var(--muted)}.activity-cell.has-activity{background:var(--soft);border-color:#9a9da8}.activity-cell.selected{outline:2px solid var(--ink)}
+.activity-weekday{text-align:center;color:var(--muted);font-size:10px;padding:5px 0}
+.goal-progress{height:7px;background:var(--soft);border-radius:9px;overflow:hidden;margin:8px 0}.goal-progress span{display:block;height:100%;background:#777b88}
+.goal-step{display:flex;gap:8px;align-items:center;margin:8px 0}.goal-step label{flex:1;font-size:12px}
+.smart-day{padding:15px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.smart-day h3{margin:0 0 8px;font-size:14px}.smart-entry{padding:8px 0;border-top:1px solid var(--line);font-size:12px}
+.reminder-overdue{border-color:#b7a0a0}

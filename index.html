@@ -37,7 +37,7 @@
         <div class="feature-groups">
           <section class="feature-group">
             <button type="button" class="feature-group-heading" aria-expanded="false"><span>01</span><div><h3>Planung &amp; Termine</h3><p>Behalte Aufgaben, Termine und wichtige Daten im Blick.</p></div></button>
-            <div class="feature-group-grid">
+            <div class="feature-group-grid" hidden>
               <button class="feature-tile" data-page="dayplan"><span>☀️</span><b>Tagesplan</b><small>Dein Tag auf einen Blick</small></button>
               <button class="feature-tile" data-page="tasks"><span>✓</span><b>Aufgaben</b><small>Was noch zu erledigen ist</small></button>
               <button class="feature-tile" data-page="calendar"><span>▦</span><b>Kalender</b><small>Deine Termine</small></button>
@@ -47,7 +47,7 @@
           </section>
           <section class="feature-group">
             <button type="button" class="feature-group-heading" aria-expanded="false"><span>02</span><div><h3>Alltag &amp; Routinen</h3><p>Gestalte deine täglichen Abläufe und halte Gedanken fest.</p></div></button>
-            <div class="feature-group-grid">
+            <div class="feature-group-grid" hidden>
               <button class="feature-tile" data-page="routines"><span>↗</span><b>Routinen</b><small>Morgen, Abend &amp; eigene</small></button>
               <button class="feature-tile" data-page="habits"><span>✳</span><b>Gewohnheiten</b><small>Deine täglichen Check-ins</small></button>
               <button class="feature-tile" data-page="journal"><span>📖</span><b>Tagebuch</b><small>Gedanken festhalten</small></button>
@@ -56,7 +56,7 @@
           </section>
           <section class="feature-group">
             <button type="button" class="feature-group-heading" aria-expanded="false"><span>03</span><div><h3>Training &amp; Fortschritt</h3><p>Organisiere deine Trainingspläne und behalte den Überblick.</p></div></button>
-            <div class="feature-group-grid">
+            <div class="feature-group-grid" hidden>
               <button class="feature-tile" data-page="training"><span>◇</span><b>Trainingspläne</b><small>Eigene Pläne speichern</small></button>
               <button class="feature-tile" data-page="workoutgen"><span>🏋️</span><b>Workout-Generator</b><small>Neue Einheiten vorschlagen</small></button>
               <button class="feature-tile" data-page="stats"><span>◷</span><b>Statistik</b><small>Deine Einträge im Blick</small></button>
@@ -64,7 +64,7 @@
           </section>
           <section class="feature-group">
             <button type="button" class="feature-group-heading" aria-expanded="false"><span>04</span><div><h3>Fokus &amp; Inspiration</h3><p>Werkzeuge für konzentriertes Arbeiten und neue Ideen.</p></div></button>
-            <div class="feature-group-grid">
+            <div class="feature-group-grid" hidden>
               <button class="feature-tile" data-page="focus"><span>◉</span><b>Focus Mode</b><small>Zeit zum Konzentrieren</small></button>
               <button class="feature-tile" data-page="briefing"><span>☀</span><b>Morgen-Briefing</b><small>Dein Tagesüberblick</small></button>
               <button class="feature-tile" data-page="quote"><span>✦</span><b>Daily Quote</b><small>Ein Gedanke für heute</small></button>
@@ -73,7 +73,7 @@
             </div>
           </section>
 
-          <section class="feature-group"><button type="button" class="feature-group-heading" aria-expanded="false"><span>05</span><div><h3>Schule &amp; persönliche Entwicklung</h3><p>Plane Unterricht, Ziele und deinen Alltag.</p></div></button><div class="feature-group-grid"><button class="feature-tile" data-page="school"><span>🎓</span><b>Schulbereich</b><small>Stundenplan &amp; Fächer</small></button><button class="feature-tile" data-page="goals"><span>◎</span><b>Zielsystem</b><small>Ziele in Schritte teilen</small></button><button class="feature-tile" data-page="activity"><span>▦</span><b>Aktivitätskalender</b><small>Deine Einträge im Monat</small></button><button class="feature-tile" data-page="reminders"><span>🔔</span><b>Erinnerungen</b><small>Wichtige Dinge vormerken</small></button><button class="feature-tile" data-page="review"><span>◷</span><b>Tagesauswertung</b><small>Tag kurz reflektieren</small></button><button class="feature-tile" data-page="assistant"><span>✦</span><b>LifeOS-Assistent</b><small>Fragen zu deinen Einträgen</small></button></div></section>
+          <section class="feature-group"><button type="button" class="feature-group-heading" aria-expanded="false"><span>05</span><div><h3>Schule &amp; persönliche Entwicklung</h3><p>Plane Unterricht, Ziele und deinen Alltag.</p></div></button><div class="feature-group-grid" hidden><button class="feature-tile" data-page="school"><span>🎓</span><b>Schulbereich</b><small>Stundenplan &amp; Fächer</small></button><button class="feature-tile" data-page="goals"><span>◎</span><b>Zielsystem</b><small>Ziele in Schritte teilen</small></button><button class="feature-tile" data-page="activity"><span>▦</span><b>Aktivitätskalender</b><small>Deine Einträge im Monat</small></button><button class="feature-tile" data-page="reminders"><span>🔔</span><b>Erinnerungen</b><small>Wichtige Dinge vormerken</small></button><button class="feature-tile" data-page="review"><span>◷</span><b>Tagesauswertung</b><small>Tag kurz reflektieren</small></button><button class="feature-tile" data-page="assistant"><span>✦</span><b>LifeOS-Assistent</b><small>Fragen zu deinen Einträgen</small></button></div></section>
         </div>
         <div class="section-heading"><h3>Offene Aufgaben</h3><button class="text-button" data-page="tasks">Alle ansehen</button></div>
         <div id="homeTasks" class="stack"></div>
@@ -251,7 +251,9 @@
       document.querySelectorAll(".feature-group-heading").forEach(button => {
         button.addEventListener("click", () => {
           const group = button.closest(".feature-group");
-          const opening = !group.classList.contains("is-open");
+          const panel = group.querySelector(".feature-group-grid");
+          const opening = panel.hidden;
+          panel.hidden = !opening;
           group.classList.toggle("is-open", opening);
           button.setAttribute("aria-expanded", String(opening));
         });

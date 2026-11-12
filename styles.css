@@ -142,3 +142,7 @@ body.theme-dark{background:#17181c}body.theme-lavender{background:#f4f0fa}
 @keyframes splashLine{to{transform:scaleX(1)}}
 @media(max-width:380px){#home .feature-group-grid{padding-left:0}}
 @media(prefers-reduced-motion:reduce){.splash-mark,.splash-word,.splash-line,#home .feature-group.is-open .feature-group-grid{animation:none}.splash-word{opacity:.78}.splash-line{transform:scaleX(1)}}
+
+/* Unterthemen beim Laden garantiert verbergen; nur nach Antippen einblenden */
+#home .feature-group-grid[hidden]{display:none!important}
+#home .feature-group-grid:not([hidden]){display:grid}

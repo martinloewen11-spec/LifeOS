@@ -1,10 +1,11 @@
-const CACHE_NAME = "lifeos-offline-v1";
+const CACHE_NAME = "lifeos-offline-v2";
 const APP_FILES = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
   "./features.js",
+  "./advanced.js",
   "./manifest.json"
 ];
 

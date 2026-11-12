@@ -1,4 +1,4 @@
-const CACHE_NAME = "lifeos-offline-v4";
+const CACHE_NAME = "lifeos-offline-v5";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -6,6 +6,7 @@ const APP_FILES = [
   "./app.js",
   "./features.js",
   "./advanced.js",
+  "./stylefood.js",
   "./manifest.json"
 ];
 

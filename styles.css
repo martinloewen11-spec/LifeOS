@@ -146,3 +146,11 @@ body.theme-dark{background:#17181c}body.theme-lavender{background:#f4f0fa}
 /* Unterthemen beim Laden garantiert verbergen; nur nach Antippen einblenden */
 #home .feature-group-grid[hidden]{display:none!important}
 #home .feature-group-grid:not([hidden]){display:grid}
+
+#style .form-card,#recipes .form-card{margin-top:16px}
+#style .form-card select{width:100%;min-width:0;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--soft);color:var(--ink)}
+.lifestyle-card{padding:15px;border:1px solid var(--line);border-radius:15px;background:var(--surface)}
+.lifestyle-card h3{margin:0 0 6px;font-size:14px}.lifestyle-card p{margin:5px 0;color:var(--muted);font-size:12px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.lifestyle-actions{display:flex;justify-content:flex-end;margin-top:8px}.lifestyle-actions button,.shopping-row button{border:0;background:transparent;color:var(--muted);padding:7px}
+.shopping-row{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.shopping-row span{flex:1;overflow-wrap:anywhere}.shopping-row.done span{text-decoration:line-through;color:var(--muted)}
